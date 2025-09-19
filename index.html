@@ -3,116 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>大六壬・六爻・射覆 | 专业计算平台</title>
-  <meta name="description" content="专业的大六壬、六爻和射覆计算工具，提供经典文献引用和详细解析" />
-  <style>
-    :root {
-      --bg: #0b0b0d;
-      --bg-soft: #121217;
-      --panel: #15151b;
-      --ink: #eae6df;
-      --ink-dim: #cfc7ba;
-      --brand: #d4b46a;
-      --brand-2: #8fb3d9;
-      --accent: #65c3a6;
-      --muted: #7a756b;
-      --ring: rgba(212,180,106,0.35);
-      --ok: #6bd08c;
-      --warn: #f0b35a;
-      --bad: #ff6b6b;
-      --shadow: 0 10px 30px rgba(0,0,0,0.35);
-      --radius: 18px;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin:0; padding:0; background: var(--bg); color: var(--ink); 
-                font-family: "Noto Serif SC", "SimSun", serif; }
-    h1,h2,h3 { font-family: "Noto Serif SC", "SimSun", serif; letter-spacing: .3px; }
-    a { color: var(--brand-2); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 24px; }
-    header.nav {
-      position: sticky; top:0; z-index: 50; backdrop-filter: saturate(180%) blur(10px);
-      background: linear-gradient(180deg, rgba(11,11,13,0.95), rgba(11,11,13,0.65)); border-bottom: 1px solid #1f1f27;
-    }
-    .nav-inner{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 24px; }
-    .brand { display:flex; align-items:center; gap:12px; font-weight:700; }
-    .brand .logo { width:28px; height:28px; display:grid; place-items:center; border-radius:10px; background: radial-gradient(100% 100% at 30% 20%, #2a2a34 0%, #121217 60%);
-      box-shadow: inset 0 0 0 1px #2b2b35;
-    }
-    .brand .logo svg{ width:18px; height:18px; }
-    .brand span{ font-family: "Noto Serif SC", serif; color: var(--ink); }
-    .nav-links { display:flex; gap:16px; font-weight:500; }
-    .nav-links a { display:inline-block; padding:8px 12px; border-radius:10px; }
-    .nav-links a:hover { background: #1a1a22; }
-    .ctrls { display:flex; gap:8px; }
-    .btn { border:1px solid #2a2a32; background: #14141a; color: var(--ink); padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600; }
-    .btn:hover { background:#1a1a22; }
-    .btn.primary { background: linear-gradient(180deg, #2a2415, #18140a); border-color:#3a3424; color: #f1e8d6; }
-    .btn.primary:hover { filter: brightness(1.05); }
-    
-    .hero { padding: 56px 24px; display:grid; grid-template-columns: 1.2fr 1fr; gap: 24px; align-items:center; }
-    @media (max-width: 900px){ .hero{ grid-template-columns:1fr; padding-top:28px; } }
-    .hero-card { background: radial-gradient(120% 120% at 20% 10%, #18181f 0%, #0c0c0f 60%); border:1px solid #2a2a34; border-radius: var(--radius); padding: 28px; box-shadow: var(--shadow); }
-    .hero h1 { font-size: clamp(28px, 4vw, 44px); margin:0 0 10px; line-height:1.15; color:#f3ead7; }
-    .hero p { color: var(--ink-dim); font-size: 15px; line-height:1.6; }
-    .tag { display:inline-flex; align-items:center; gap:8px; padding:6px 10px; border:1px dashed #3a3323; border-radius:999px; background:#131217; color:#e6d8b9; font-weight:600; margin-bottom:14px; }
-    .scroll-hint { font-size: 12px; color:#9a927f; margin-top:10px; }
-    
-    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
-    .card { grid-column: span 12; background: linear-gradient(180deg, #14141a, #0f0f14); border:1px solid #2a2a34; border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
-    .card h2 { margin-top:0; font-size: 22px; color:#f0e6cf; }
-    .kicker { color: var(--muted); font-size: 13px; font-weight:700; letter-spacing:.2em; text-transform: uppercase; margin-bottom: 6px; }
-    .muted { color: var(--muted); }
-    .pill { display:inline-block; padding:6px 10px; border-radius:999px; border:1px solid #2b2b35; font-size: 12px; }
-    .hr { height:1px; background:#262631; margin: 16px 0; }
-
-    /* Feature specific */
-    .columns { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-    @media (max-width: 900px){ .columns{ grid-template-columns: 1fr; } }
-    .feature { background:#121219; border:1px solid #242433; border-radius: 14px; padding:16px; }
-
-    /* Calculation Forms */
-    .calc-form { display:grid; grid-template-columns: 1fr; gap: 16px; }
-    .form-group { margin-bottom: 16px; }
-    .form-group label { display:block; margin-bottom:8px; font-weight:500; }
-    .select, .input, .textarea { width:100%; background:#111118; border:1px solid #2a2a34; border-radius:10px; padding:10px 12px; color:var(--ink); font-family: inherit; }
-    .input[type="datetime-local"] { padding:9px 12px; }
-    .result-area { background:#101019; border:1px solid #30303a; border-radius:12px; padding:16px; margin-top:20px; }
-    .classic-quote { border-left:4px solid var(--brand); padding-left:16px; margin:16px 0; font-style:italic; }
-    .interpretation { background:#13131a; padding:16px; border-radius:12px; border:1px dashed #2f2f3a; }
-
-    /* Liu Ren */
-    .pan { display:grid; grid-template-columns: repeat(6, 1fr); gap:8px; margin-top:8px; }
-    .branch { background:#12121a; border:1px solid #2a2a34; border-radius:10px; padding:10px; text-align:center; font-family:"Noto Serif SC", serif; }
-    .branch.highlight { outline: 2px solid var(--brand); background: #191812; }
-    .legend { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
-
-    /* Liu Yao */
-    .yi { display:grid; grid-template-columns: 1.1fr 1fr; gap: 16px; }
-    @media (max-width: 900px){ .yi{ grid-template-columns: 1fr; } }
-    .line-inputs { display:grid; grid-template-rows: repeat(6, auto); gap: 8px; }
-    .line-row { display:flex; align-items:center; justify-content:space-between; gap: 10px; }
-    .line-row label { width: 110px; color: var(--ink-dim); }
-    .line-select { background:#111118; border:1px solid #2a2a34; border-radius:10px; padding:8px 10px; color:var(--ink); }
-    .order { display:flex; gap:10px; align-items:center; margin: 8px 0 4px; color: var(--muted); }
-
-    .hexbox { background:#121219; border:1px solid #242433; border-radius:14px; padding:12px; }
-    .hex-title { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
-    .hex { display:flex; flex-direction:column; gap:8px; padding:10px 0; }
-    .gline { height:10px; border-radius:6px; position:relative; background:linear-gradient(180deg, #2a2a34, #1a1a22); }
-    .gline.yin { background: none; }
-    .gline.yin::before, .gline.yin::after { content:""; display:block; position:absolute; top:0; bottom:0; width:42%; background:linear-gradient(180deg,#2a2a34,#1a1a22); border-radius:6px; }
-    .gline.yin::before { left:0; }
-    .gline.yin::after { right:0; }
-    .gline.moving { outline:2px solid var(--brand); box-shadow:0 0 0 3px rgba(212,180,106,0.15); }
-
-    .tiny { font-size:12px; color:var(--muted); }
-
-    footer { margin: 40px 0 24px; color:#9a927f; text-align:center; }
-    .foot-links { display:flex; gap:14px; justify-content:center; }
-
-    .ring:focus { outline: none; box-shadow: 0 0 0 6px var(--ring); }
-  </style>
+  <title>大六壬・六爻・射覆・周易 | 专业计算平台</title>
+  <meta name="description" content="专业的大六壬、六爻、射覆与周易查阅计算工具。所有运算基于用户输入，不做随机起卦。内置经典文献引用与详解。" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="nav">
@@ -124,12 +17,13 @@
             <circle cx="12" cy="12" r="4" fill="#c8b68f"/>
           </svg>
         </div>
-        <span>大六壬・六爻・射覆</span>
+        <span>大六壬・六爻・射覆・周易</span>
       </div>
       <nav class="nav-links">
         <a href="#liuren">大六壬</a>
         <a href="#liuyao">六爻</a>
         <a href="#shefu">射覆</a>
+        <a href="#zhouyi">周易</a>
         <a href="#gloss">术语</a>
         <a href="#resources">典籍</a>
       </nav>
@@ -142,30 +36,44 @@
   <main class="wrap">
     <section class="hero">
       <div class="hero-card">
-        <div class="tag">專業工具 · 經典文獻 · 詳細解析</div>
+        <div class="tag">專業工具 · 經典文獻 · 詳細解析 · 不隨機</div>
         <h1>術數專業計算平台</h1>
         <p>
-          本平台提供<strong>大六壬</strong>、<strong>六爻</strong>和<strong>射覆</strong>的專業計算工具，
-          所有計算基於用戶輸入的參數，無隨機性。參考大量經典文獻，提供詳細解析和古籍引用。
+          本平台提供<strong>大六壬</strong>、<strong>六爻</strong>、<strong>射覆</strong>與<strong>周易查閱</strong>工具，
+          所有計算<strong>僅依用戶輸入</strong>（日期、時間、卦爻），<u>不做任何隨機起卦</u>。
         </p>
+        <div class="help">
+          <h4>快速使用（白話）</h4>
+          <ul>
+            <li><strong>大六壬</strong>：輸入占時（必填）。計算日干支、時干支、十二地支盤與「教學版四課三傳」，據五行生克生成解讀。</li>
+            <li><strong>六爻</strong>：逐爻選 6/7/8/9（老陰/少陽/少陰/老陽）。生成本卦、變卦、互卦與動爻位。</li>
+            <li><strong>射覆</strong>：選上下卦與動爻，結合八卦類象、五行、爻位，推斷物品特徵。</li>
+            <li><strong>周易</strong>：用六爻 / 上下卦 / 直接選卦三法查閱卦象（非起卦）。</li>
+          </ul>
+        </div>
         <p class="scroll-hint">↓ 向下滾動開始使用</p>
       </div>
       <div class="hero-card">
         <div class="columns">
           <div class="feature">
             <div class="kicker">大六壬</div>
-            <h3 style="margin:.2rem 0 .6rem">天時地利推算</h3>
-            <p class="muted">輸入時間地點參數，計算四課三傳，解析天地盤關係，提供《壬歸》《六壬大全》等經典文獻解析。</p>
+            <h3 style="margin:.2rem 0 .6rem">日時四課 · 三傳（教學版）</h3>
+            <p class="muted">依公曆時間計算干支、時辰與五行生克，構建十二地支盤與教學版四課三傳（<em>算法公開、無隨機</em>）。</p>
           </div>
           <div class="feature">
             <div class="kicker">六爻</div>
-            <h3 style="margin:.2rem 0 .6rem">卦象推演</h3>
-            <p class="muted">輸入爻象信息，計算本卦、變卦、互卦，解析爻辭卦辭，引用《周易》《易林》等經典文獻。</p>
+            <h3 style="margin:.2rem 0 .6rem">本卦・變卦・互卦</h3>
+            <p class="muted">支持老陰/老陽動爻，自動標記動爻位，展示上下卦與卦名。</p>
+          </div>
+          <div class="feature">
+            <div class="kicker">周易</div>
+            <h3 style="margin:.2rem 0 .6rem">卦象查閱</h3>
+            <p class="muted">用三種方式查看卦象，輔以要點摘要與經典引文。</p>
           </div>
           <div class="feature">
             <div class="kicker">射覆</div>
             <h3 style="margin:.2rem 0 .6rem">物象推斷</h3>
-            <p class="muted">輸入物品特徵，進行分類推斷，引用《梅花易數》《五行大義》等經典文獻解析物象關係。</p>
+            <p class="muted">八卦類象 × 五行特性 × 爻位結構，生成可操作的物品特徵清單。</p>
           </div>
         </div>
       </div>
@@ -174,10 +82,20 @@
     <!-- Liu Ren -->
     <section id="liuren" class="card">
       <div class="kicker">大六壬</div>
-      <h2>大六壬・天時地利推算</h2>
-      <p class="muted">請輸入占卜時間和地點信息，系統將根據傳統大六壬算法計算四課三傳，並提供詳細解析。</p>
+      <h2>大六壬・天時地利推算（教學版四課三傳）</h2>
+      <p class="muted">請輸入占卜時間（必填）。本版基於公曆換算日干支、時干支與五行生克，構建「十二支盤」與<strong>教學版</strong>四課三傳（透明可驗），僅作學習與演示。</p>
       <div class="hr"></div>
-      
+
+      <div class="help">
+        <strong>算法要點（不隨機）：</strong>
+        <ol>
+          <li>以 <em>1984-02-02 甲子日</em> 為零點推算日干支；時支按兩小時一時計，時干依「甲己起甲、乙庚起丙、丙辛起戊、丁壬起庚、戊癸起壬」。</li>
+          <li>四課（教學版）：①日干對日支；②日支對時干；③時干對時支；④日干對時支（呈現干支/五行關係）。</li>
+          <li>三傳（教學版）：初傳取<em>時支</em>；中傳取<em>被初傳所生之五行</em>的最近地支；末傳取<em>能生扶日干五行</em>的最近地支。</li>
+          <li>解讀：以五行生克為綱，描述「遞生／相剋／比和」格局與順逆勢（<em>非傳統斷訣替代</em>）。</li>
+        </ol>
+      </div>
+
       <form class="calc-form" id="liurenForm">
         <div class="form-group">
           <label for="lrDateTime">占卜時間</label>
@@ -185,37 +103,41 @@
         </div>
         <div class="form-group">
           <label for="lrLocation">地點（可選）</label>
-          <input type="text" id="lrLocation" class="input" placeholder="例如：北京">
+          <input type="text" id="lrLocation" class="input" placeholder="例如：北京 / London">
         </div>
         <div class="form-group">
           <label for="lrQuestion">占問事項（可選）</label>
-          <textarea id="lrQuestion" class="textarea" rows="2" placeholder="簡要描述占問內容"></textarea>
+          <textarea id="lrQuestion" class="textarea" rows="2" placeholder="簡要描述占問內容（如：工作面試、簽約、出行等）"></textarea>
         </div>
-        <button type="submit" class="btn primary">計算大六壬課式</button>
+        <button type="submit" class="btn primary">計算大六壬</button>
       </form>
 
       <div id="liurenResult" class="result-area" style="display:none;">
         <h3>大六壬課式解析</h3>
+        <div class="legend">
+          <span class="pill">★ 高亮：三傳</span>
+          <span class="pill">◎ 日支</span>
+          <span class="pill">◇ 時支</span>
+        </div>
         <div class="pan" id="pan"></div>
-        
+
         <div class="interpretation">
-          <h4>課傳解析</h4>
-          <p id="lrAnalysis"></p>
-          
+          <h4>干支與四課</h4>
+          <p id="lrFourLessons"></p>
+        </div>
+
+        <div class="interpretation">
+          <h4>三傳與五行格局</h4>
+          <p id="lrTrans"></p>
+        </div>
+
+        <div class="interpretation">
+          <h4>綜合判讀</h4>
+          <p id="lrJudgment"></p>
           <div class="classic-quote">
             <p id="lrQuote"></p>
             <cite id="lrSource"></cite>
           </div>
-        </div>
-        
-        <div class="interpretation">
-          <h4>神煞信息</h4>
-          <p id="lrShensha"></p>
-        </div>
-        
-        <div class="interpretation">
-          <h4>綜合斷辭</h4>
-          <p id="lrJudgment"></p>
         </div>
       </div>
     </section>
@@ -223,16 +145,24 @@
     <!-- Liu Yao -->
     <section id="liuyao" class="card">
       <div class="kicker">六爻</div>
-      <h2>六爻・卦象推演</h2>
-      <p class="muted">請輸入爻象信息（自下而上），系統將計算本卦、變卦和互卦，並提供爻辭解析和古籍引用。</p>
+      <h2>六爻・本卦／變卦／互卦</h2>
+      <p class="muted">請輸入爻象信息（自下而上）。系統僅做結構演算（本卦、之卦、互卦、上下卦、動爻），不替代具體納甲用神與日時斷法。</p>
       <div class="hr"></div>
-      
+
+      <div class="help">
+        <strong>輸入規則：</strong>
+        <ul>
+          <li>6 = 老陰（--，變陽）　7 = 少陽（—，不變）</li>
+          <li>8 = 少陰（--，不變）　9 = 老陽（—，變陰）</li>
+        </ul>
+      </div>
+
       <form class="calc-form" id="liuyaoForm">
         <div class="order">
           <span class="pill">輸入順序</span>
           <label><input type="radio" name="lyOrder" value="bottomup" checked> 下→上（初爻至上爻）</label>
         </div>
-        
+
         <div class="line-inputs" id="lyInputs">
           <div class="line-row">
             <label for="line1">初爻（第一爻）</label>
@@ -295,51 +225,57 @@
             </select>
           </div>
         </div>
-        
+
         <div class="form-group">
           <label for="lyQuestion">占問事項（可選）</label>
           <textarea id="lyQuestion" class="textarea" rows="2" placeholder="簡要描述占問內容"></textarea>
         </div>
-        
+
         <button type="submit" class="btn primary">計算六爻卦象</button>
       </form>
 
       <div id="liuyaoResult" class="result-area" style="display:none;">
         <h3>六爻卦象解析</h3>
-        
+
         <div class="yi">
           <div>
             <div class="hexbox">
               <div class="hex-title"><strong>本卦</strong><span class="tiny" id="lyBaseInfo"></span></div>
               <div id="lyBaseHex" class="hex"></div>
+              <div class="tiny" id="lyBaseNames"></div>
             </div>
           </div>
           <div>
             <div class="hexbox">
               <div class="hex-title"><strong>之卦</strong><span class="tiny" id="lyChangedInfo"></span></div>
               <div id="lyChangedHex" class="hex"></div>
+              <div class="tiny" id="lyChangedNames"></div>
             </div>
           </div>
         </div>
-        
-        <div class="interpretation">
-          <h4>卦象解析</h4>
-          <p id="lyAnalysis"></p>
-          
-          <div class="classic-quote">
-            <p id="lyQuote"></p>
-            <cite id="lySource"></cite>
+
+        <div class="yi" style="margin-top:12px;">
+          <div>
+            <div class="hexbox">
+              <div class="hex-title"><strong>互卦</strong><span class="tiny" id="lyNuclearInfo"></span></div>
+              <div id="lyNuclearHex" class="hex"></div>
+              <div class="tiny" id="lyNuclearNames"></div>
+            </div>
           </div>
-        </div>
-        
-        <div class="interpretation">
-          <h4>動爻解析</h4>
-          <p id="lyMoving"></p>
-        </div>
-        
-        <div class="interpretation">
-          <h4>綜合斷辭</h4>
-          <p id="lyJudgment"></p>
+          <div>
+            <div class="interpretation">
+              <h4>卦象解析</h4>
+              <p id="lyAnalysis"></p>
+              <div class="classic-quote">
+                <p id="lyQuote"></p>
+                <cite id="lySource"></cite>
+              </div>
+              <h4>動爻解析</h4>
+              <p id="lyMoving"></p>
+              <h4>綜合斷辭</h4>
+              <p id="lyJudgment"></p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -348,80 +284,211 @@
     <section id="shefu" class="card">
       <div class="kicker">射覆</div>
       <h2>射覆・物象推斷</h2>
-      <p class="muted">請輸入物品的特徵信息，系統將根據傳統五行分類和物象理論進行推斷，並提供古籍引用。</p>
+      <p class="muted">請輸入卦象信息，系統按八卦類象、五行特性、爻位等進行分析（教學工具，不替代臨場取象）。</p>
       <div class="hr"></div>
-      
-      <form class="calc-form" id="shefuForm">
-        <div class="form-group">
-          <label for="sfShape">形狀</label>
-          <select id="sfShape" class="select" required>
-            <option value="">請選擇</option>
-            <option value="圓">圓形</option>
-            <option value="方">方形</option>
-            <option value="長">長形</option>
-            <option value="扁">扁形</option>
-            <option value="不規則">不規則形</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="sfMaterial">材質</label>
-          <select id="sfMaterial" class="select" required>
-            <option value="">請選擇</option>
-            <option value="金">金屬</option>
-            <option value="木">木質</option>
-            <option value="水">水性/液體</option>
-            <option value="火">火性/電子</option>
-            <option value="土">土性/陶瓷</option>
-            <option value="石">石質/玉器</option>
-            <option value="布">布質</option>
-            <option value="紙">紙質</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="sfColor">顏色</label>
-          <select id="sfColor" class="select" required>
-            <option value="">請選擇</option>
-            <option value="青">青色/綠色</option>
-            <option value="赤">赤色/紅色</option>
-            <option value="黃">黃色</option>
-            <option value="白">白色</option>
-            <option value="黑">黑色</option>
-            <option value="紫">紫色</option>
-            <option value="多色">多種顏色</option>
-          </select>
-        </div>
-        
-        <div class="form-group">
-          <label for="sfUsage">用途（可選）</label>
-          <input type="text" id="sfUsage" class="input" placeholder="例如：書寫工具、容器等">
-        </div>
-        
-        <button type="submit" class="btn primary">進行物象推斷</button>
-      </form>
 
-      <div id="shefuResult" class="result-area" style="display:none;">
-        <h3>射覆推斷結果</h3>
-        
-        <div class="interpretation">
-          <h4>五行分類</h4>
-          <p id="sfCategory"></p>
-        </div>
-        
-        <div class="interpretation">
-          <h4>物象解析</h4>
-          <p id="sfAnalysis"></p>
-          
-          <div class="classic-quote">
-            <p id="sfQuote"></p>
-            <cite id="sfSource"></cite>
+      <div class="tabs">
+        <div class="tab active" data-tab="input">卦象輸入</div>
+        <div class="tab" data-tab="bagua">八卦類象</div>
+        <div class="tab" data-tab="wuxing">五行特性</div>
+        <div class="tab" data-tab="reference">參考表格</div>
+      </div>
+
+      <div class="tab-content active" id="tab-input">
+        <form class="calc-form" id="shefuForm">
+          <div class="form-group">
+            <label for="sfUpper">上卦（代表顏色、外部特徵）</label>
+            <select id="sfUpper" class="select" required></select>
+          </div>
+
+          <div class="form-group">
+            <label for="sfLower">下卦（代表質地、內部特性）</label>
+            <select id="sfLower" class="select" required></select>
+          </div>
+
+          <div class="form-group">
+            <label for="sfMovingYao">動爻位置（可多選）</label>
+            <select id="sfMovingYao" class="select" multiple>
+              <option value="1">初爻</option>
+              <option value="2">二爻</option>
+              <option value="3">三爻</option>
+              <option value="4">四爻</option>
+              <option value="5">五爻</option>
+              <option value="6">上爻</option>
+            </select>
+            <div class="tiny">按住Ctrl/⌘鍵可多選</div>
+          </div>
+
+          <div class="form-group">
+            <label for="sfDateTime">占卜時間</label>
+            <input type="datetime-local" id="sfDateTime" class="input">
+          </div>
+
+          <div class="form-group">
+            <label for="sfWaiying">外應信息（可選）</label>
+            <textarea id="sfWaiying" class="textarea" rows="2" placeholder="當時看到、聽到、感受到的特殊現象"></textarea>
+          </div>
+
+          <button type="submit" class="btn primary">進行物象推斷</button>
+        </form>
+
+        <div id="shefuResult" class="result-area" style="display:none;">
+          <h3>射覆推斷結果</h3>
+
+          <div class="interpretation">
+            <h4>八卦類象分析</h4>
+            <p id="sfBaguaAnalysis"></p>
+          </div>
+
+          <div class="interpretation">
+            <h4>五行特性分析</h4>
+            <p id="sfWuxingAnalysis"></p>
+          </div>
+
+          <div class="interpretation">
+            <h4>卦名爻位分析</h4>
+            <p id="sfYaoAnalysis"></p>
+          </div>
+
+          <div class="interpretation">
+            <h4>全卦綜合分析</h4>
+            <p id="sfCompleteAnalysis"></p>
+          </div>
+
+          <div class="interpretation">
+            <h4>時間旺衰分析</h4>
+            <p id="sfTimeAnalysis"></p>
+          </div>
+
+          <div class="interpretation">
+            <h4>外應提示</h4>
+            <p id="sfWaiyingAnalysis"></p>
+          </div>
+
+          <div class="interpretation">
+            <h4>推斷結論</h4>
+            <p id="sfJudgment"></p>
+            <div class="classic-quote">
+              <p id="sfQuote"></p>
+              <cite id="sfSource"></cite>
+            </div>
           </div>
         </div>
-        
+      </div>
+
+      <div class="tab-content" id="tab-bagua">
+        <h3>八卦類象參考</h3>
+        <div id="baguaTableWrap"></div>
+      </div>
+
+      <div class="tab-content" id="tab-wuxing">
+        <h3>五行特性參考</h3>
+        <div id="wuxingTableWrap"></div>
+      </div>
+
+      <div class="tab-content" id="tab-reference">
+        <h3>其他參考信息</h3>
+
+        <h4>卦象旺衰表</h4>
+        <table class="reference-table">
+          <thead>
+            <tr>
+              <th>卦象</th>
+              <th>旺時特性</th>
+              <th>衰時特性</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>乾 ☰ 金</td><td>貴重、剛健、圓滿</td><td>剛愎、冷硬、過剛易折</td></tr>
+            <tr><td>坤 ☷ 土</td><td>厚重、承載、滋養</td><td>遲滯、笨重、缺乏活力</td></tr>
+            <tr><td>震 ☳ 木</td><td>活躍、生長、創新</td><td>動盪、不安、缺乏穩定</td></tr>
+            <tr><td>巽 ☴ 木</td><td>靈活、順應、溝通</td><td>無主見、隨波逐流、軟弱</td></tr>
+            <tr><td>坎 ☵ 水</td><td>智慧、流動、適應</td><td>險陷、陰暗、不定</td></tr>
+            <tr><td>离 ☲ 火</td><td>光明、熱情、文化</td><td>虛榮、浮躁、易滅</td></tr>
+            <tr><td>艮 ☶ 土</td><td>穩定、靜止、堅實</td><td>停滯、保守、阻礙</td></tr>
+            <tr><td>兑 ☱ 金</td><td>喜悅、溝通、銳利</td><td>口舌、毀折、淺薄</td></tr>
+          </tbody>
+        </table>
+
+        <h4>爻位類象表</h4>
+        <table class="reference-table">
+          <thead>
+            <tr><th>爻位</th><th>代表意義</th><th>物品部位</th></tr>
+          </thead>
+          <tbody id="yaoTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Zhouyi -->
+    <section id="zhouyi" class="card">
+      <div class="kicker">周易</div>
+      <h2>周易・卦象查閱（靜態查閱，不隨機起卦）</h2>
+      <p class="muted">可按三種方式查閱：①輸入六爻；②選擇上下卦；③直接選卦名稱。顯示卦象結構、上下卦、互卦與簡要要點。</p>
+      <div class="hr"></div>
+
+      <div class="tabs">
+        <div class="tab active" data-tab="zy-by-lines">六爻輸入</div>
+        <div class="tab" data-tab="zy-by-tri">上下卦選擇</div>
+        <div class="tab" data-tab="zy-by-name">直接選卦</div>
+      </div>
+
+      <div class="tab-content active" id="tab-zy-by-lines">
+        <form class="calc-form" id="zyLinesForm">
+          <div class="line-inputs" id="zyLineInputs"></div>
+          <button type="submit" class="btn primary">生成卦象</button>
+        </form>
+      </div>
+
+      <div class="tab-content" id="tab-zy-by-tri">
+        <form class="calc-form" id="zyTriForm">
+          <div class="form-group">
+            <label for="zyUpperTri">上卦</label>
+            <select id="zyUpperTri" class="select"></select>
+          </div>
+          <div class="form-group">
+            <label for="zyLowerTri">下卦</label>
+            <select id="zyLowerTri" class="select"></select>
+          </div>
+          <button type="submit" class="btn primary">生成卦象</button>
+        </form>
+      </div>
+
+      <div class="tab-content" id="tab-zy-by-name">
+        <form class="calc-form" id="zyNameForm">
+          <div class="form-group">
+            <label for="zyNameSelect">選擇卦名</label>
+            <select id="zyNameSelect" class="select"></select>
+          </div>
+          <button type="submit" class="btn primary">顯示卦象</button>
+        </form>
+      </div>
+
+      <div id="zhouyiResult" class="result-area" style="display:none;">
+        <h3 id="zyTitle">卦象</h3>
+        <div class="yi">
+          <div>
+            <div class="hexbox">
+              <div class="hex-title"><strong id="zyHexName"></strong><span class="tiny" id="zyInfo"></span></div>
+              <div id="zyHex" class="hex"></div>
+              <div class="tiny" id="zyNames"></div>
+            </div>
+          </div>
+          <div>
+            <div class="hexbox">
+              <div class="hex-title"><strong>互卦</strong><span class="tiny" id="zyNuclearInfo"></span></div>
+              <div id="zyNuclearHex" class="hex"></div>
+              <div class="tiny" id="zyNuclearNames"></div>
+            </div>
+          </div>
+        </div>
         <div class="interpretation">
-          <h4>推斷結果</h4>
-          <p id="sfJudgment"></p>
+          <h4>要點</h4>
+          <p id="zySummary"></p>
+          <div class="classic-quote">
+            <p id="zyQuote"></p>
+            <cite id="zySource"></cite>
+          </div>
         </div>
       </div>
     </section>
@@ -432,22 +499,22 @@
       <h2>術數專業詞彙</h2>
       <div class="columns">
         <div class="feature">
-          <h3>大六壬術語</h3>
-          <p class="muted"><strong>四課</strong>：根據占卜時間推算出的四個課式，反映事物發展的階段。</p>
-          <p class="muted"><strong>三傳</strong>：初傳、中傳、末傳，表示事物發展的過程和結果。</p>
-          <p class="muted"><strong>天將</strong>：貴人、螣蛇、朱雀等十二天將，代表不同的人事和環境因素。</p>
+          <h3>大六壬術語（教學版對應）</h3>
+          <p class="muted"><strong>干支</strong>：天干與地支之配合，60日一循環。</p>
+          <p class="muted"><strong>四課</strong>：此版以日干/日支/時干/時支四對，呈現五行關係。</p>
+          <p class="muted"><strong>三傳</strong>：初傳（時支）—中傳（生初傳者）—末傳（生扶日干者）。</p>
         </div>
         <div class="feature">
           <h3>六爻術語</h3>
-          <p class="muted"><strong>本卦</strong>：初始得到的卦象，反映當前狀態。</p>
-          <p class="muted"><strong>變卦</strong>：動爻變化後得到的卦象，反映未來發展。</p>
-          <p class="muted"><strong>互卦</strong>：由本卦中間四爻組成的卦，反映事物內在聯繫。</p>
+          <p class="muted"><strong>本卦</strong>：原始六爻卦。</p>
+          <p class="muted"><strong>變卦</strong>：動爻互易陰陽後所得卦。</p>
+          <p class="muted"><strong>互卦</strong>：由第2~4、3~5爻組合成的中間之卦。</p>
         </div>
         <div class="feature">
           <h3>射覆術語</h3>
-          <p class="muted"><strong>五行分類</strong>：根據物品特性歸入金木水火土五類。</p>
-          <p class="muted"><strong>物象推斷</strong>：根據物品形狀、材質、顏色等推斷其屬性和用途。</p>
-          <p class="muted"><strong>類象思維</strong>：傳統術數中的類比推理方法，將物品與宇宙萬物相聯繫。</p>
+          <p class="muted"><strong>八卦類象</strong>：按八卦特性映射自然、人事、物品等類別。</p>
+          <p class="muted"><strong>五行特性</strong>：金木水火土五類之性質與對應物。</p>
+          <p class="muted"><strong>外應</strong>：占時環境異常現象，可輔助推斷。</p>
         </div>
       </div>
     </section>
@@ -467,7 +534,7 @@
           </ul>
         </div>
         <div class="feature">
-          <h3>六爻典籍</h3>
+          <h3>六爻/周易典籍</h3>
           <ul class="muted">
             <li>《周易》· 周代·多人著作</li>
             <li>《易林》· 漢代·焦贛</li>
@@ -488,329 +555,11 @@
     </section>
 
     <footer>
-      <div>© <span id="year"></span> 術數專業計算平台 · 大六壬 × 六爻 × 射覆</div>
+      <div>© <span id="year"></span> 術數專業計算平台 · 大六壬 × 六爻 × 射覆 × 周易</div>
       <div class="foot-links"><a href="#">返回頂部</a><span>·</span><a href="#gloss">術語</a><span>·</span><a href="#resources">典籍</a></div>
     </footer>
   </main>
 
-  <script>
-    // ---------- Utilities ----------
-    const $ = (sel) => document.querySelector(sel);
-    const $$ = (sel) => Array.from(document.querySelectorAll(sel));
-    
-    // 五行相生相克關係
-    const fiveElements = { 木:'木', 火:'火', 土:'土', 金:'金', 水:'水' };
-    const generating = { 水:'木', 木:'火', 火:'土', 土:'金', 金:'水' }; // 相生：key 生 value
-    const controlling = { 水:'火', 火:'金', 金:'木', 木:'土', 土:'水' }; // 相克：key 克 value
-
-    // 天干
-    const stems = [
-      {k:'甲', w: '木'}, {k:'乙', w:'木'}, {k:'丙', w:'火'}, {k:'丁', w:'火'},
-      {k:'戊', w:'土'}, {k:'己', w:'土'}, {k:'庚', w:'金'}, {k:'辛', w:'金'}, {k:'壬', w:'水'}, {k:'癸', w:'水'}
-    ];
-
-    // 地支
-    const branches = [
-      {z:'子', w:'水'}, {z:'丑', w:'土'}, {z:'寅', w:'木'}, {z:'卯', w:'木'},
-      {z:'辰', w:'土'}, {z:'巳', w:'火'}, {z:'午', w:'火'}, {z:'未', w:'土'},
-      {z:'申', w:'金'}, {z:'酉', w:'金'}, {z:'戌', w:'土'}, {z:'亥', w:'水'}
-    ];
-
-    // 經典文獻引用
-    const classicalQuotes = {
-      liuren: [
-        {text: "壬課以象為先，四課三傳乃天地人三才之顯現。", source: "《壬歸》"},
-        {text: "日辰為體，貴神為用，四課即事之始末。", source: "《六壬大全》"},
-        {text: "三傳遞生，人舉薦者；三傳遞克，眾人欺者。", source: "《大六壬指南》"},
-        {text: "課傳之中，五行生克為樞機，陰陽變易為妙用。", source: "《六壬斷案》"}
-      ],
-      liuyao: [
-        {text: "易者，象也。象也者，像也。", source: "《周易·繫辭》"},
-        {text: "爻者，言乎變者也。效天下之動者也。", source: "《周易·繫辭》"},
-        {text: "卦以存時，爻以示變。", source: "《周易略例》"},
-        {text: "剛柔相推，變在其中矣。", source: "《周易·繫辭》"}
-      ],
-      shefu: [
-        {text: "物有其類，事有其象，推而廣之，天下之理得矣。", source: "《梅花易數》"},
-        {text: "五行者，天地之性，萬物之綱紀。", source: "《五行大義》"},
-        {text: "觀物取象，觸類旁通，聖人之道也。", source: "《周易·繫辭》"},
-        {text: "物以類聚，方以群分，吉凶生矣。", source: "《周易·繫辭》"}
-      ]
-    };
-
-    // 獲取隨機經典引用
-    function getRandomQuote(type) {
-      const quotes = classicalQuotes[type];
-      return quotes[Math.floor(Math.random() * quotes.length)];
-    }
-
-    // ---------- 大六壬計算 ----------
-    $('#liurenForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const dateTime = $('#lrDateTime').value;
-      const location = $('#lrLocation').value;
-      const question = $('#lrQuestion').value;
-      
-      if (!dateTime) {
-        alert('請輸入占卜時間');
-        return;
-      }
-      
-      // 模擬計算過程
-      calculateLiuRen(dateTime, location, question);
-    });
-
-    function calculateLiuRen(dateTime, location, question) {
-      // 這裡應該是複雜的大六壬計算算法
-      // 此處僅做演示用簡化版
-      
-      const dateObj = new Date(dateTime);
-      const hour = dateObj.getHours();
-      const minute = dateObj.getMinutes();
-      
-      // 根據時間計算四課三傳（簡化版）
-      const dayStem = stems[dateObj.getDate() % 10];
-      const dayBranch = branches[dateObj.getMonth()];
-      
-      // 隨機選擇三個傳
-      const threeTransmissions = [
-        branches[(hour + 1) % 12],
-        branches[(hour + 5) % 12],
-        branches[(hour + 9) % 12]
-      ];
-      
-      // 顯示結果
-      renderLiuRenResult(dayStem, dayBranch, threeTransmissions, question);
-      
-      // 顯示結果區域
-      $('#liurenResult').style.display = 'block';
-    }
-
-    function renderLiuRenResult(dayStem, dayBranch, threeTransmissions, question) {
-      // 渲染天地盤
-      const pan = $('#pan');
-      pan.innerHTML = '';
-      
-      branches.forEach(b => {
-        const div = document.createElement('div');
-        div.className = 'branch';
-        const idx = threeTransmissions.findIndex(tb => tb.z === b.z);
-        if(idx > -1) div.classList.add('highlight');
-        div.innerHTML = `<div style="font-size:22px">${b.z}</div><div class="soft">五行:${b.w}</div>` + 
-                       (idx > -1 ? `<div class="pill" style="margin-top:6px">傳${idx+1}</div>` : '');
-        pan.appendChild(div);
-      });
-      
-      // 生成解析
-      const quote = getRandomQuote('liuren');
-      $('#lrQuote').textContent = quote.text;
-      $('#lrSource').textContent = quote.source;
-      
-      $('#lrAnalysis').innerHTML = `
-        日干：<strong>${dayStem.k}（${dayStem.w}）</strong>，日支：<strong>${dayBranch.z}（${dayBranch.w}）</strong>。
-        三傳：<strong>${threeTransmissions[0].z}（${threeTransmissions[0].w}）</strong> → 
-        <strong>${threeTransmissions[1].z}（${threeTransmissions[1].w}）</strong> → 
-        <strong>${threeTransmissions[2].z}（${threeTransmissions[2].w}）</strong>。
-      `;
-      
-      $('#lrShensha').textContent = "根據時間推算，今日天乙貴人在午，文昌在申，驛馬在巳。";
-      
-      $('#lrJudgment').innerHTML = `
-        ${question ? `針對「${question}」：` : ''}
-        日干${dayStem.k}${dayStem.w}生三傳${threeTransmissions[0].w}，初傳生中傳，中傳生末傳，為遞生之象，主事體順遂，有人相助。
-        然末傳${threeTransmissions[2].z}與日支${dayBranch.z}相${dayBranch.w === threeTransmissions[2].w ? '比和' : '克'}，
-        需注意${dayBranch.w === threeTransmissions[2].w ? '穩固基礎' : '外在變化'}。
-      `;
-    }
-
-    // ---------- 六爻計算 ----------
-    $('#liuyaoForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const line1 = $('#line1').value;
-      const line2 = $('#line2').value;
-      const line3 = $('#line3').value;
-      const line4 = $('#line4').value;
-      const line5 = $('#line5').value;
-      const line6 = $('#line6').value;
-      const question = $('#lyQuestion').value;
-      
-      if (!line1 || !line2 || !line3 || !line4 || !line5 || !line6) {
-        alert('請完整輸入六爻信息');
-        return;
-      }
-      
-      // 計算六爻
-      calculateLiuYao([line6, line5, line4, line3, line2, line1], question);
-    });
-
-    function calculateLiuYao(lines, question) {
-      // 這裡應該是複雜的六爻計算算法
-      // 此處僅做演示用簡化版
-      
-      // 轉換為陰陽和動爻標記
-      const yinyangLines = lines.map(val => ({
-        value: val,
-        isYang: val === '7' || val === '9',
-        isMoving: val === '6' || val === '9'
-      }));
-      
-      // 計算變卦
-      const changedLines = yinyangLines.map(line => 
-        line.isMoving ? { ...line, isYang: !line.isYang } : line
-      );
-      
-      // 顯示結果
-      renderLiuYaoResult(yinyangLines, changedLines, question);
-      
-      // 顯示結果區域
-      $('#liuyaoResult').style.display = 'block';
-    }
-
-    function renderLiuYaoResult(baseLines, changedLines, question) {
-      // 渲染卦象
-      renderHexagram(document.getElementById('lyBaseHex'), baseLines);
-      renderHexagram(document.getElementById('lyChangedHex'), changedLines);
-      
-      // 卦象信息
-      const baseMoving = baseLines.filter(line => line.isMoving).length;
-      $('#lyBaseInfo').textContent = `動爻: ${baseMoving}`;
-      $('#lyChangedInfo').textContent = `變卦`;
-      
-      // 生成解析
-      const quote = getRandomQuote('liuyao');
-      $('#lyQuote').textContent = quote.text;
-      $('#lySource').textContent = quote.source;
-      
-      $('#lyAnalysis').innerHTML = `
-        本卦有<strong>${baseMoving}</strong>個動爻，${baseMoving === 0 ? '為靜卦，主事體穩定' : 
-        baseMoving === 1 ? '一爻動，事有初變' : baseMoving > 3 ? '多爻動，事體複雜多變' : '事體漸變'}。
-        之卦${baseMoving === 0 ? '與本卦相同' : '由動爻變化而來'}，${baseMoving === 0 ? '無大變化' : 
-        '顯示未來發展趨勢'}。
-      `;
-      
-      $('#lyMoving').textContent = baseMoving === 0 ? 
-        "無動爻，卦象穩定，宜守成。" : 
-        `動爻位置：${baseLines.map((line, i) => line.isMoving ? 6-i : null).filter(Boolean).join('、')}爻。`;
-      
-      $('#lyJudgment').innerHTML = `
-        ${question ? `針對「${question}」：` : ''}
-        本卦${baseMoving === 0 ? '靜止' : '動變'}，之卦${baseLines.filter(l => l.isMoving).length > 3 ? '多變' : '漸變'}，
-        主${baseMoving === 0 ? '現狀維持' : baseMoving > 3 ? '重大變化' : '逐步發展'}。
-        宜${baseMoving === 0 ? '守成' : '順勢而為'}，${baseMoving > 0 ? '注意動爻所代表的事項變化。' : '保持現狀即可。'}
-      `;
-    }
-
-    function renderHexagram(container, lines) {
-      container.innerHTML = '';
-      for(let i = 5; i >= 0; i--) {
-        const div = document.createElement('div');
-        const yin = !lines[i].isYang;
-        div.className = 'gline ' + (yin ? 'yin' : 'yang') + (lines[i].isMoving ? ' moving' : '');
-        container.appendChild(div);
-      }
-    }
-
-    // ---------- 射覆計算 ----------
-    $('#shefuForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const shape = $('#sfShape').value;
-      const material = $('#sfMaterial').value;
-      const color = $('#sfColor').value;
-      const usage = $('#sfUsage').value;
-      
-      if (!shape || !material || !color) {
-        alert('請完整輸入物品特徵');
-        return;
-      }
-      
-      // 計算射覆
-      calculateShefu(shape, material, color, usage);
-    });
-
-    function calculateShefu(shape, material, color, usage) {
-      // 這裡應該是複雜的射覆計算算法
-      // 此處僅做演示用簡化版
-      
-      // 五行映射
-      const materialToElement = {
-        '金': '金', '木': '木', '水': '水', '火': '火', '土': '土',
-        '石': '土', '布': '木', '紙': '木'
-      };
-      
-      const colorToElement = {
-        '青': '木', '赤': '火', '黃': '土', '白': '金', '黑': '水', '紫': '火'
-      };
-      
-      const element = materialToElement[material] || '土';
-      const colorElement = colorToElement[color] || '土';
-      
-      // 顯示結果
-      renderShefuResult(shape, material, color, usage, element, colorElement);
-      
-      // 顯示結果區域
-      $('#shefuResult').style.display = 'block';
-    }
-
-    function renderShefuResult(shape, material, color, usage, element, colorElement) {
-      // 生成解析
-      const quote = getRandomQuote('shefu');
-      $('#sfQuote').textContent = quote.text;
-      $('#sfSource').textContent = quote.source;
-      
-      $('#sfCategory').innerHTML = `
-        形狀：<strong>${shape}</strong>，材質：<strong>${material}（${element}行）</strong>，
-        顏色：<strong>${color}（${colorElement}行）</strong>${usage ? `，用途：<strong>${usage}</strong>` : ''}。
-      `;
-      
-      $('#sfAnalysis').innerHTML = `
-        ${element}行${colorElement}行，${element === colorElement ? '同類相扶' : 
-        generating[element] === colorElement ? '材生顏色，內外相生' : 
-        controlling[element] === colorElement ? '材克顏色，內制外' : 
-        generating[colorElement] === element ? '顏色生材，外助內' : 
-        controlling[colorElement] === element ? '顏色克材，外制內' : '各有特性'}。
-        ${shape === '圓' ? '圓形屬金，主圓滿流通' : 
-        shape === '方' ? '方形屬土，主穩定厚重' : 
-        shape === '長' ? '長形屬木，主生長發展' : 
-        shape === '扁' ? '扁形屬水，主流動變化' : '不規則形，主變化多端'}。
-      `;
-      
-      $('#sfJudgment').textContent = 
-        `根據物象推斷，此物可能為${['金屬器具', '木製物品', '容器', '電子產品', '文具', '飾品'][Math.floor(Math.random() * 6)]}。`;
-    }
-
-    // ---------- 主題切換 ----------
-    const THEME_KEY = 'oracle-theme';
-    function loadTheme(){ return localStorage.getItem(THEME_KEY) || 'dark'; }
-    function saveTheme(v){ localStorage.setItem(THEME_KEY, v); }
-    function applyTheme(v){ document.documentElement.setAttribute('data-theme', v); }
-    $('#toggleTheme').addEventListener('click', ()=>{
-      const cur = loadTheme(); const nxt = cur === 'dark' ? 'light' : 'dark';
-      saveTheme(nxt); applyTheme(nxt);
-    });
-
-    // 淺色主題樣式
-    const style = document.createElement('style');
-    style.textContent = `
-      [data-theme="light"] { --bg:#f7f5f1; --bg-soft:#f4efe6; --panel:#fff; --ink:#1b1b1d; --ink-dim:#333; --muted:#6d6a63; --brand:#9a6d1e; --ring: rgba(154,109,30,.2); }
-      [data-theme="light"] .hero-card, [data-theme="light"] .card { background: #fff; border-color:#ece7dc; }
-      [data-theme="light"] .nav { background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6)); border-bottom-color:#eee5d6; }
-      [data-theme="light"] .nav-links a:hover { background:#f5efe3; }
-      [data-theme="light"] .btn { background:#fff; border-color:#e9e2d4; }
-      [data-theme="light"] .btn.primary { background: linear-gradient(180deg, #fffbf2, #f2eadc); border-color:#e7dcc6; color:#3a2e16; }
-      [data-theme="light"] .branch { background:#fff7ed; border-color:#f2e6cf; }
-      [data-theme="light"] .result-area { background:#f9f7f2; border-color:#e9e2d4; }
-      [data-theme="light"] .interpretation { background:#f5f2eb; border-color:#e9e2d4; }
-    `;
-    document.head.appendChild(style);
-
-    // ---------- 初始化 ----------
-    (function init(){
-      applyTheme(loadTheme());
-      $('#year').textContent = new Date().getFullYear();
-    })();
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
